@@ -36,6 +36,7 @@ interface UserDao {
     fun deleteUserManually(name: String)
 
 
-
+    @Delete
+    fun DeleteUserList(user: List<User>)
 
 }

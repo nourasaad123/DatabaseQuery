@@ -75,7 +75,7 @@ class MainActivity : ComponentActivity() {
                             onClick = {
                                 val user = User(name = username, age = age)
                                 userDao.addUser(user)
-                               // Toast.makeText(context, "data added", Toast.LENGTH_LONG).show()
+                                Toast.makeText(context, "data added", Toast.LENGTH_LONG).show()
                             }) {
                             Text("Insert")
                         }
@@ -84,7 +84,7 @@ class MainActivity : ComponentActivity() {
                             modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
                             onClick = {
                                 data = userDao.getAllUsers().joinToString(separator = "\n")
-
+                                Toast.makeText(context, "Data Selected", Toast.LENGTH_LONG)
                             }) {
                             Text("Retrieve")
                         }
@@ -93,12 +93,28 @@ class MainActivity : ComponentActivity() {
                         Button(
                             modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
                             onClick = {
-                                val user = User(name = username, age = age)
+                                // val user = User(name = username, age = age)
+                                val list = userDao.getAllUsers()
 
-                                userDao.deleteUser(user)
+                                userDao.DeleteUserList(list)
+                                Toast.makeText(context, "All Deleted", Toast.LENGTH_LONG)
+
                                 //deleteUserManually("noura")
                             }) {
-                            Text("Delete")
+                            Text("Delete All")
+                        }
+                        Spacer(modifier = Modifier.height(12.dp))
+
+                        Button(
+                            modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
+                            onClick = {
+                                val user = User(name = username, age = age)
+                                userDao.deleteUser(user)
+                                Toast.makeText(context, "User deleted", Toast.LENGTH_LONG)
+
+                                //deleteUserManually("noura")
+                            }) {
+                            Text("Delete User")
                         }
                         Spacer(modifier = Modifier.height(12.dp))
                         Button(
@@ -106,6 +122,7 @@ class MainActivity : ComponentActivity() {
                             onClick = {
                                 val list = userDao.getAllUsers()
                                 userDao.updateUser(list[0].copy(2))
+                                Toast.makeText(context, "User Updated", Toast.LENGTH_LONG)
 
                             }) {
                             Text("Update")
